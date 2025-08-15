@@ -4,9 +4,11 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"os"
 	"strings"
 	"time"
 
+	"github.com/golang-jwt/jwt/v5"
 	"github.com/google/uuid"
 	"github.com/ryszhio/tasktracker/internal/model"
 	"github.com/ryszhio/tasktracker/internal/repository"
@@ -16,6 +18,12 @@ import (
 type UserService struct {
 	userRepo *repository.UserRepository
 	timeout  time.Duration
+}
+
+type JWTClaims struct {
+	ID       string `json:"id"`
+	Username string `json:"username"`
+	jwt.RegisteredClaims
 }
 
 func NewUserService(userRepo *repository.UserRepository) *UserService {
@@ -64,8 +72,23 @@ func (s *UserService) CreateUser(c context.Context, req model.RequestCreateUser)
 
 	log.Printf("UserService.CreateUser - User created successfully in database: %s", user.ID.String())
 
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, JWTClaims{
+		ID:       user.ID.String(),
+		Username: user.Username,
+		RegisteredClaims: jwt.RegisteredClaims{
+			Issuer:    user.ID.String(),
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(24 * time.Hour)),
+		},
+	})
+
+	secretKey := os.Getenv("SECRET_JWT")
+	ss, err := token.SignedString([]byte(secretKey))
+	if err != nil {
+		return nil, err
+	}
+
 	return &model.ResponseLoginUser{
-		AccessToken: "something",
+		AccessToken: ss,
 		Username:    user.Username,
 		ID:          user.ID.String(),
 	}, nil
@@ -101,7 +124,22 @@ func (s *UserService) Login(c context.Context, req model.RequestLoginUser) (*mod
 
 	log.Printf("UserService.Login - Password verification successful for the user: %s", user.ID.String())
 
-	return &model.ResponseLoginUser{AccessToken: "", Username: user.Username, ID: user.ID.String()}, nil
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, JWTClaims{
+		ID:       user.ID.String(),
+		Username: user.Username,
+		RegisteredClaims: jwt.RegisteredClaims{
+			Issuer:    user.ID.String(),
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(24 * time.Hour)),
+		},
+	})
+
+	secret := os.Getenv("SECRET_JWT")
+	ss, err := token.SignedString([]byte(secret))
+	if err != nil {
+		return nil, err
+	}
+
+	return &model.ResponseLoginUser{AccessToken: ss, Username: user.Username, ID: user.ID.String()}, nil
 }
 
 func (s *UserService) GetUserByID(c context.Context, userID string) (*repository.User, error) {
