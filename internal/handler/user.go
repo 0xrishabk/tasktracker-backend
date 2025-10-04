@@ -5,9 +5,9 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	"github.com/ryszhio/tasktracker/internal/model"
-	"github.com/ryszhio/tasktracker/internal/service"
-	"github.com/ryszhio/tasktracker/internal/util"
+	"github.com/0xrishabk/tasktracker/internal/model"
+	"github.com/0xrishabk/tasktracker/internal/service"
+	"github.com/0xrishabk/tasktracker/internal/util"
 )
 
 type UserHandler struct {

@@ -8,10 +8,10 @@ import (
 	"time"
 
 	_ "github.com/joho/godotenv/autoload"
-	"github.com/ryszhio/tasktracker/db"
-	"github.com/ryszhio/tasktracker/internal/handler"
-	"github.com/ryszhio/tasktracker/internal/repository"
-	"github.com/ryszhio/tasktracker/internal/service"
+	"github.com/0xrishabk/tasktracker/db"
+	"github.com/0xrishabk/tasktracker/internal/handler"
+	"github.com/0xrishabk/tasktracker/internal/repository"
+	"github.com/0xrishabk/tasktracker/internal/service"
 )
 
 type Server struct {

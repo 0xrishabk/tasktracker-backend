@@ -8,8 +8,8 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/ryszhio/tasktracker/internal/model"
-	"github.com/ryszhio/tasktracker/internal/repository"
+	"github.com/0xrishabk/tasktracker/internal/model"
+	"github.com/0xrishabk/tasktracker/internal/repository"
 )
 
 type TaskService struct {

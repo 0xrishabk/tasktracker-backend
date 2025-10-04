@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"github.com/joho/godotenv"
-	"github.com/ryszhio/tasktracker/internal/server"
+	"github.com/0xrishabk/tasktracker/internal/server"
 )
 
 func main() {

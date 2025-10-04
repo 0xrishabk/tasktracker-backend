@@ -4,9 +4,9 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/ryszhio/tasktracker/internal/model"
-	"github.com/ryszhio/tasktracker/internal/repository"
-	"github.com/ryszhio/tasktracker/internal/service"
+	"github.com/0xrishabk/tasktracker/internal/model"
+	"github.com/0xrishabk/tasktracker/internal/repository"
+	"github.com/0xrishabk/tasktracker/internal/service"
 )
 
 type TaskHandler struct {

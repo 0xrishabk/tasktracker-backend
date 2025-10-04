@@ -1,4 +1,4 @@
-module github.com/ryszhio/tasktracker
+module github.com/0xrishabk/tasktracker
 
 go 1.24.5
 

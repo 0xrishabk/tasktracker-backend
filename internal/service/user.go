@@ -10,9 +10,9 @@ import (
 
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/google/uuid"
-	"github.com/ryszhio/tasktracker/internal/model"
-	"github.com/ryszhio/tasktracker/internal/repository"
-	"github.com/ryszhio/tasktracker/internal/util"
+	"github.com/0xrishabk/tasktracker/internal/model"
+	"github.com/0xrishabk/tasktracker/internal/repository"
+	"github.com/0xrishabk/tasktracker/internal/util"
 )
 
 type UserService struct {

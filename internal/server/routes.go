@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"github.com/ryszhio/tasktracker/internal/handler"
+	"github.com/0xrishabk/tasktracker/internal/handler"
 )
 
 func (s *Server) RegisterRoutes(taskHandler *handler.TaskHandler, userHandler *handler.UserHandler) http.Handler {
